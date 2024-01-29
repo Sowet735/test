@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Графический редактор</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+      var drawing = false;
+
+      canvas.addEventListener("mousedown", function(e) {
+        drawing = true;
+        ctx.lineWidth = document.getElementById("penWidth").value;
+        ctx.strokeStyle = document.getElementById("penColor").value;
+        ctx.beginPath();
+        ctx.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
+      });
+
+      canvas.addEventListener("mousemove", function(e) {
+        if (drawing) {
+          ctx.lineTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
+          ctx.stroke();
+        }
+      });
+
+      canvas.addEventListener("mouseup", function(e) {
+        if (drawing) {
+          drawing = false;
+          ctx.lineTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
+          ctx.stroke();
+          ctx.closePath();
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Графический редактор</h1>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <br>
+  <label for="penWidth">Толщина пера:</label>
+  <input type="range" id="penWidth" min="1" max="10" value="1">
+  <br>
+  <label for="penColor">Цвет пера:</label>
+  <input type="color" id="penColor" value="#000000">
+</body>
+</html>
