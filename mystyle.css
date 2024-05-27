@@ -6,7 +6,7 @@ body {
 	font-weight: bold;
 }
 /* CSS styles */
-h1 {
+h1#welcome {
 font-family: Impact, sans-serif;
 color: ;
   text-shadow: 10px 5px 5px ;
